@@ -1,0 +1,122 @@
+{
+  "name": "csv-to-txt",
+  "version": "0.1.0",
+  "description": "Custom CSV to TXT parser",
+  "main": "lib/index.js",
+  "browser": "lib/index.js",
+  "module": "src/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "eslint": "eslint --fix \"{src,test}/**/*.js\"",
+    "build": "npm run build:clean && npm run build:babel",
+    "build:babel": "mkdir -p lib && babel ./src -d ./lib",
+    "build:clean": "rm -rf ./lib",
+    "prepublishOnly": "npm run build",
+    "publish:dry-run": "npm publish --dry-run",
+    "test": "nyc --reporter=text --reporter=json-summary mocha --require setup-env --require test/setup.js \"test/**/*.test.js\"",
+    "posttest": "npm run lint",
+    "stylelint": "stylelint \"**/*.scss\"",
+    "lint": "npm run eslint && npm run stylelint",
+    "storybook": "start-storybook -p 9001",
+    "build-storybook": "build-storybook -c .storybook -o .storybook-static",
+    "static-storybook": "npx http-server .storybook-static",
+    "deploy-storybook": "npm run build-storybook && storybook-to-ghpages -- --out=.storybook-static",
+    "deploy-storybook:dry-run": "npm run deploy-storybook -- --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.secureserver.net:PWS/pws-forms.git"
+  },
+  "keywords": [
+    "react",
+    "pws",
+    "forms"
+  ],
+  "author": "GoDaddy.com Operating Company, LLC",
+  "maintainers": [
+    "Anna Kim <akim3@godaddy.com>",
+    "Ibrahim Abouzied <iabouzied@godaddy.com>",
+    "Matt Zhan <mzhan1@godaddy.com>",
+    "Morgan Cook <mcook1@godaddy.com>",
+    "Shawn Kemp <skemp@godaddy.com>"
+  ],
+  "license": "UNLICENSED",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "browserslist": [
+    "extends browserslist-config-godaddy"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/register": "^7.8.3",
+    "@exemplar/storybook-react": "^2.0.1",
+    "@storybook/addon-knobs": "^6.1.11",
+    "@storybook/addons": "^6.1.11",
+    "@storybook/react": "^6.1.11",
+    "@storybook/storybook-deployer": "2.8.7",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "browserslist-config-godaddy": "^1.0.1",
+    "chai": "^4.2.0",
+    "core-js": "^3.6.5",
+    "css-loader": "3.6.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-json": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-mocha": "^6.1.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jsdom": "^16.4.0",
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.13.1",
+    "sass-loader": "^8.0.0",
+    "setup-env": "^1.2.2",
+    "sinon": "^9.0.0",
+    "sinon-chai": "^3.3.0",
+    "style-loader": "^1.2.1",
+    "stylelint": "13.7.0",
+    "stylelint-config-godaddy": "0.4.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "faker": "^5.1.0",
+    "humanize-string": "^1.0.1",
+    "node-sass": "^4.12.0",
+    "react-color": "2.14.1",
+    "react-csv-reader": "^3.1.2",
+    "react-quill": "^1.3.5",
+    "react-render-html": "^0.6.0",
+    "react-sortable-tree": "^2.8.0",
+    "turndown": "^7.0.0",
+    "use-global-hook": "^0.2.1"
+  },
+  "publishConfig": {}
+}
