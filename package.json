@@ -35,13 +35,9 @@
     "pws",
     "forms"
   ],
-  "author": "GoDaddy.com Operating Company, LLC",
+  "author": "Matt Zhan",
   "maintainers": [
-    "Anna Kim <akim3@godaddy.com>",
-    "Ibrahim Abouzied <iabouzied@godaddy.com>",
-    "Matt Zhan <mzhan1@godaddy.com>",
-    "Morgan Cook <mcook1@godaddy.com>",
-    "Shawn Kemp <skemp@godaddy.com>"
+    "Matt Zhan <myzhan24@gmail.com>"
   ],
   "license": "UNLICENSED",
   "babel": {
