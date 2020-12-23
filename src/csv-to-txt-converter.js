@@ -7,6 +7,7 @@ const CsvToTxtConverter = () => {
 
     const [csvString, setCsvString] = useState();
     const [selectedFile, setSelectedFile] = useState();
+    const [visibilityArr, setVisibilityArr] = useState([]);
 
     // On file select (from the pop up)
     const onFileChange = event => {
@@ -35,28 +36,52 @@ const CsvToTxtConverter = () => {
         // axios.post("api/uploadfile", formData);
     };
 
-    function convertCsvToTxt(data = []) {
+    function onFileLoaded(data, fileInfo) {
+        setCsvString(data);
+        if (data && data[0]) {
+            setVisibilityArr(data[0].map(() => {
+                return true;
+            }));
+        }
+    }
+
+    function convertCsvToTxt(data = [], visibilityArr = []) {
         let ret = '';
-        data.forEach((row)=>{
-            row.forEach((item)=>{
-                ret += `${item} `
+        data.forEach((row) => {
+            row.forEach((item, i) => {
+                if (visibilityArr[i]) {
+                    ret += `${item} `
+                }
             });
             ret += '\n';
         })
         return ret;
     }
 
+    function convertVisibilityArrToCheckboxes(visibilityArr) {
+        return visibilityArr.map((visible, i) => {
+            return (<input type="checkbox" id={i} checked={visible} onChange={(event) => {
+                const arr = visibilityArr.map(v => v);
+                arr[i] = event.target.checked;
+                setVisibilityArr(arr);
+            }}/>)
+        });
+    }
+
     return (<>
-            <h1>CSV</h1>
+            <h1>Upload .csv</h1>
             <CSVReader onFileLoaded={(data, fileInfo) => {
-                console.dir(data, fileInfo)
-                setCsvString(data);
-            }} />
+                onFileLoaded(data, fileInfo);
+            }}/>
+
+            <h1>Toggle Column Visible</h1>
+            <div>
+                {convertVisibilityArrToCheckboxes(visibilityArr)}
+            </div>
 
             <h1>TXT</h1>
-            <pre>
-                {convertCsvToTxt(csvString)}
-            </pre>
+            <textarea value={convertCsvToTxt(csvString, visibilityArr)} readOnly={true} style={{width:'800px', height: '1000px'}}>
+            </textarea>
         </>
     );
 };
