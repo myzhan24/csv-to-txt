@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.secureserver.net:PWS/pws-forms.git"
+    "url": "git@github.com:myzhan24/csv-to-txt.git"
   },
   "keywords": [
     "react",
